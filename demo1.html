@@ -1,0 +1,42 @@
+<!-- 一个h5页面的模版 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo1</title>
+    <link rel="stylesheet" href="css/demo1.css">
+    <style>
+      * {padding:0 ; margin:0;}
+      #container {
+        height: 100vh;
+      }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <!-- 初始化一个svg模版，方便后续更改内容 -->
+    <svg style="display:none;" id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="291.0041031984648px" height="330px">
+      <defs>
+        <text id="a" font-family="PingFang SC" opacity="0.09" text-anchor="start" font-size="12px" transform="rotate(-17.93993528929399)"></text>
+      </defs>
+      <use xlink:href="#a" x="15" y="65"/>
+      <use xlink:href="#a" x="150" y="230"/>
+    </svg>
+    <script>     
+      const a = document.getElementById('a');
+      // 修改a的文本内容
+      a.textContent = 'jamie jamie@jamie.work'
+      // svg转base64
+      function svgToBase64(svg) {
+        var xml = new XMLSerializer().serializeToString(svg);
+        return "data:image/svg+xml;base64," + window.btoa(xml);
+      }
+      const svg = document.getElementById('svg');
+      const base64=svgToBase64(svg);
+      // 插入对应的dome节点中作为背景图
+      const handle = document.getElementById('container');
+      handle.style.backgroundImage = `url(${base64})`;
+
+    </script>
+</body>
+</html>
